@@ -286,11 +286,11 @@
   _.memoize = function(func) {
     var memorized = {};
 	  return function(){
-	    var index = Array.prototype.slice.call(arguments);
-      if(memorized[index] === undefined){
-        return memorized[index] = func.apply(this,arguments);
-      }
-      return memorized[index]
+	  var index = Array.prototype.slice.call(arguments);
+    if(memorized[index] === undefined){
+      return memorized[index] = func.apply(this,index);
+    }
+    return memorized[index]
 	  };
   };
 
@@ -301,6 +301,10 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = Array.prototype.slice.call(arguments).slice(2,arguments.length);
+    setTimeout(function(){
+      return args.length > 0 ? func.apply(this,args) : func.apply(this);
+    },wait);
   };
 
 

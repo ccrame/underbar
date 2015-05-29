@@ -284,6 +284,14 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var memorized = {};
+	  return function(){
+	    var index = Array.prototype.slice.call(arguments);
+      if(memorized[index] === undefined){
+        return memorized[index] = func.apply(this,arguments);
+      }
+      return memorized[index]
+	  };
   };
 
   // Delays a function for the given number of milliseconds, and then calls

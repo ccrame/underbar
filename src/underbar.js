@@ -39,8 +39,8 @@
   // last element.
   _.last = function(array, n) {
     if (n > array.length) {
-	  n = array.length;
-	}
+      n = array.length;
+    }
     return n === undefined ? array[array.length - 1] : array.slice(array.length - n, array.length);
   };
 
@@ -51,14 +51,14 @@
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
     if(Array.isArray(collection)){
-	  for(var i = 0; i < collection.length; ++i){
-	    iterator(collection[i],i,collection);
-	  }
-	}else{
-	  for(var property in collection){
-	    iterator(collection[property],property,collection);
-	  }
-	}
+      for(var i = 0; i < collection.length; ++i){
+        iterator(collection[i],i,collection);
+      }
+    }else{
+      for(var property in collection){
+        iterator(collection[property],property,collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -81,33 +81,33 @@
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
     var result = [];
-	_.each(collection,function(item){
-	  if(test(item)){
-	    result.push(item);
-	  }
-	});
-	return result;
+    _.each(collection,function(item){
+      if(test(item)){
+        result.push(item);
+      }
+    });
+    return result;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-	var result = _.filter(collection,function(item){
-	  return !test(item);
-	});
-	return result;
+    var result = _.filter(collection,function(item){
+      return !test(item);
+    });
+    return result;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
     var result = [];    
-	_.filter(array,function(item){
-	  if(_.indexOf(result,item) === -1){
-	    result.push(item);
-	  }
-	});
-	return result;
+    _.filter(array,function(item){
+      if(_.indexOf(result,item) === -1){
+        result.push(item);
+      }
+    });
+    return result;
   };
 
 
@@ -116,11 +116,11 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
-	var result = [];
-	_.each(collection,function(item){
+    var result = [];
+    _.each(collection,function(item){
       result.push(iterator(item));	
-	});
-	return result;
+    });
+  return result;
   };
 
   /*
@@ -164,9 +164,9 @@
   _.reduce = function(collection, iterator, accumulator) {
     var result = accumulator === undefined ? collection[0] : accumulator;
    	_.each(accumulator === undefined ? collection.slice(1,collection.length) : collection,function(item){
-	  result = iterator(result,item);
-	});
-	return result;
+      result = iterator(result,item);
+    });
+    return result;
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -185,23 +185,23 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
-	iterator = iterator === undefined ? _.identity : iterator;
-	return _.reduce(collection,function(last,current){
-	  if (!last){
-	    return false;
-	  }
-	  return iterator(current) ? true : false;
-	},true);
+    iterator = iterator === undefined ? _.identity : iterator;
+    return _.reduce(collection,function(last,current){
+      if (!last){
+      return false;
+      }
+      return iterator(current) ? true : false;
+    },true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-	iterator = iterator === undefined ? _.identity : iterator;
-	return !_.every(collection,function(item){
-	  return !iterator(item);
-	});
+  iterator = iterator === undefined ? _.identity : iterator;
+  return !_.every(collection,function(item){
+    return !iterator(item);
+  });
   };
 
 
@@ -225,22 +225,22 @@
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
     _.each(arguments,function(arg){
-	  _.each(arg,function(item,key){
-	    obj[key] = item;
-	  });
-	});
-	return obj;
+      _.each(arg,function(item,key){
+        obj[key] = item;
+      });
+    });
+  return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
     _.each(arguments,function(arg){
-	  _.each(arg,function(item,key){
-	    obj[key] = obj[key] === undefined ? item : obj[key];
-	  });
-	});
-	return obj;
+      _.each(arg,function(item,key){
+        obj[key] = obj[key] === undefined ? item : obj[key];
+      });
+    });
+  return obj;
   };
 
 
@@ -285,13 +285,13 @@
   // instead if possible.
   _.memoize = function(func) {
     var memorized = {};
-	  return function(){
-	  var index = Array.prototype.slice.call(arguments);
-    if(memorized[index] === undefined){
-      return memorized[index] = func.apply(this,index);
-    }
+    return function(){
+      var index = Array.prototype.slice.call(arguments);
+      if(memorized[index] === undefined){
+        return memorized[index] = func.apply(this,index);
+      }
     return memorized[index]
-	  };
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls

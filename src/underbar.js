@@ -383,6 +383,20 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    var result = [];
+
+    for(var i = 0; i < nestedArray.length; ++i){
+
+      if(nestedArray[i].constructor === Array){
+        _.each(_.flatten(nestedArray[i]),function(item){
+          result.push(item);
+        });
+      } else {
+        result.push(nestedArray[i]);
+      }
+    }
+
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains

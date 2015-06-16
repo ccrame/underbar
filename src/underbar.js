@@ -355,6 +355,14 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    return collection.sort(function(a,b){
+      if(typeof iterator === 'function'){
+        return iterator(a) - iterator(b);
+      } else if (iterator === 'length'){
+        return a.length - b.length;
+      }
+      return a[iterator].apply(a) - b[iterator].apply(b);
+    }); 
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -422,6 +430,16 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var result = arguments[0];
+    var others = _.flatten([].slice.call(arguments,1));
+
+    for(var i = result.length - 1; i >= 0; --i){
+      if(_.indexOf(others,result[i]) !== -1){
+        result.splice(i,1);
+      }
+    }
+
+    return result;
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once

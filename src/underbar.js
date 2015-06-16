@@ -448,5 +448,19 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var good = true;
+    function toggle(){
+      setTimeout(function(){
+        good = true;
+      },wait)
+    }
+
+    return function(){
+      if(good){
+        good = false;
+        func.apply(this,arguments);
+        toggle();
+      }
+    };
   };
 }());

@@ -402,6 +402,21 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var result = arguments[0];
+
+    var filterResult = function(arr){
+      for(var i = result.length - 1; i >= 0; --i ){
+        if(_.indexOf(arr,result[i]) === -1){
+          result.splice(i,1);
+        }
+      }
+    }//end of filterResult
+
+    _.each([].slice.call(arguments,1),function(item){
+      filterResult(item);
+    });
+
+    return result;
   };
 
   // Take the difference between one array and a number of other arrays.
